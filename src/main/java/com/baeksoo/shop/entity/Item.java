@@ -1,4 +1,4 @@
-package com.baeksoo.shop;
+package com.baeksoo.shop.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
