@@ -7,6 +7,8 @@ import com.baeksoo.shop.repository.MemberRepository;
 import com.baeksoo.shop.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -26,7 +28,6 @@ public class ItemController {
 
     private final ItemRepository itemRepository;
     private final ItemService itemService;
-    private final MemberRepository memberRepository;
 
     @GetMapping("/list")
     public String list(Model model) {
@@ -95,19 +96,12 @@ public class ItemController {
         return "redirect:/list";
     }
 
-    @GetMapping("/sinup")
-    public String sinup(){
-
-        return "sinup";
-    }
-    @PostMapping("/sinupadd")
-    public String sinupAdd(@ModelAttribute Member member){
-
-        var memberPassword =new BCryptPasswordEncoder().encode(member.getPassword());
-        member.setPassword(memberPassword);
-        System.out.println(member);
-
-        memberRepository.save(member);
-    return "redirect:/list";
+    @GetMapping("/list/page/{abc}")
+    public String getlistPage(Model model,@PathVariable Integer abc) {
+      Page<Item> res= itemRepository.findPageBy(PageRequest.of(abc-1,5));
+      var page= res.getTotalPages();
+        model.addAttribute("items", res);
+        model.addAttribute("page", page);
+        return "list";
     }
 }

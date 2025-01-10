@@ -5,16 +5,15 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>로그인</title>
   <link href="/main.css" rel="stylesheet">
 </head>
 <body>
-<div th:replace="~{nav.html::navbar}"></div>
-<form action="/member" method="POST">
-  <input name="username" placeholder="id">
-  <input name="password" placeholder="pw">
-  <input name="displayName" placeholder="name">
-  <button type="submit">회원가입</button>s
+<!--<div th:replace="~{nav.html::navbar}"></div>-->
+<form action="/login" method="POST">
+  <input name="username">
+  <input name="password" type="password">
+  <button type="submit">전송</button>
 </form>
 
 </body>

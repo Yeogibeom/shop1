@@ -1,0 +1,24 @@
+<!doctype html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>로그인</title>
+  <link href="/main.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="~{nav.html::navbar}"></div>
+<h4>마이페이지임</h4>
+<div sec:authentication="principal"></div>
+<div sec:authentication="principal.username"></div>
+
+
+<div sec:authorize="isAnonymous()">
+  <p>현제 로그아웃상태입니다</p>
+</div>
+<p><a href="/logout">로그아웃</a></p>
+
+</body>
+</html>
