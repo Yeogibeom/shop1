@@ -18,5 +18,18 @@
     <p th:text="${item.price}" >7억</p>
 </div>
 
+<form  action="/comment" method="post">
+    <input name="comment">
+    <input name="parent" th:value="${item.id}" style="display: none">
+    <button type="submit">전송</button>
+</form>
+
+<div th:each="comment : ${comments}">
+
+    <p th:text="${comment.username}">Username</p>
+    <p th:text="${comment.content}">Content</p>
+
+</div>
+
 </body>
-</html>
+</html>s

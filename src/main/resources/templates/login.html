@@ -9,12 +9,42 @@
   <link href="/main.css" rel="stylesheet">
 </head>
 <body>
-<!--<div th:replace="~{nav.html::navbar}"></div>-->
+<div th:replace="~{nav.html::navbar}"></div>
 <form action="/login" method="POST">
   <input name="username">
   <input name="password" type="password">
   <button type="submit">전송</button>
 </form>
 
+<!--<form >-->
+<!--  <input name="username" id="username">-->
+<!--  <input name="password" type="password" id="password">-->
+
+<!--</form>-->
+<!--<button onclick="loginJWT()">전송</button>-->
+
+<!--<script>-->
+<!--  function loginJWT(){-->
+<!--    console.log("Username:", document.querySelector('#username').value);-->
+<!--    console.log("Password:", document.querySelector('#password').value);-->
+<!--    fetch('/login/jwt', {-->
+<!--      method : 'POST',-->
+<!--      headers : {'Content-Type': 'application/json'},-->
+<!--      body : JSON.stringify({-->
+<!--        username : document.querySelector('#username').value,-->
+<!--        password : document.querySelector('#password').value-->
+<!--      })-->
+<!--    }).then(r => r.text()).then((r)=>{ console.log(r) })-->
+<!--  }-->
+<!--</script>-->
+
+<!--<button onclick="getMyPage()" >JWT마이페이지 주세요</button>-->
+<!--<script>-->
+<!--  function getMyPage(){-->
+<!--    fetch('/my-page/jwt')-->
+<!--            .then(r => r.text())-->
+<!--            .then(r =>{ console.log(r) })-->
+<!--  }-->
+<!--</script>-->
 </body>
 </html>

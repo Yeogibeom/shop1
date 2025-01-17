@@ -1,7 +1,9 @@
 package com.baeksoo.shop.controller;
 
+import com.baeksoo.shop.entity.Comment;
 import com.baeksoo.shop.entity.Item;
 import com.baeksoo.shop.entity.Member;
+import com.baeksoo.shop.repository.CommentRepository;
 import com.baeksoo.shop.repository.ItemRepository;
 import com.baeksoo.shop.repository.MemberRepository;
 import com.baeksoo.shop.service.ItemService;
@@ -28,6 +30,7 @@ public class ItemController {
 
     private final ItemRepository itemRepository;
     private final ItemService itemService;
+    private final CommentRepository commentRepository;
 
     @GetMapping("/list")
     public String list(Model model) {
@@ -51,6 +54,11 @@ public class ItemController {
 
     @GetMapping("/detail/{id}")
     String detail(@PathVariable long id ,Model model){
+
+        List<Comment> comments= commentRepository.findAllByParentId(1L);
+        log.info(comments.toString());
+
+        model.addAttribute("comments", comments);
 
         Optional<Item> result =  itemService.findById(id);
 
@@ -97,11 +105,18 @@ public class ItemController {
     }
 
     @GetMapping("/list/page/{abc}")
-    public String getlistPage(Model model,@PathVariable Integer abc) {
-      Page<Item> res= itemRepository.findPageBy(PageRequest.of(abc-1,5));
-      var page= res.getTotalPages();
-        model.addAttribute("items", res);
-        model.addAttribute("page", page);
+    String getListPage(Model model, @PathVariable Integer abc) {
+        Page<Item> result = itemRepository.findPageBy(PageRequest.of(abc-1, 5));
+        model.addAttribute("items", result);
+
+        return "list";
+    }
+
+    @PostMapping("/search")
+    public String search(@RequestParam String searchText) {
+      var result=  itemRepository.rawQuery1(searchText);
+//      행이 많아지면 index를 사용하면됨 pull text index는 단어로 정렬하는것  한국어는 n-gram parser이용 문자를 두글자식 만들어서 정렬
+      log.info(result.toString());
         return "list";
     }
 }

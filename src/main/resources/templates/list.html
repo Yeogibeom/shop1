@@ -9,22 +9,30 @@
 </head>
 <body>
 <div th:replace="~{nav.html::navbar}"></div>
+<form action="/search" method="post" style="display: inline">
+    <input name="searchText">
+    <button>검색</button>
+</form>
 
 <div class="card" th:each="i : ${items}">
     <img src="https://placehold.co/300">
     <div>
         <h4 th:text="${i.title}">상품 제목</h4>
         <a th:href="@{'/detail/' + ${i.id}}">링크</a>
-        <a th:href="@{'/edit/'+ ${i.id}}">수정</a>s
+        <a th:href="@{'/edit/'+ ${i.id}}">수정</a>
 
         <p th:text="${i.price}">상품 가격</p>
+
+
     </div>
 
-    <div th:each="z:${page}">
-        <a href="@{'/list/page/'+${z.page}}">페이지</a>
-    </div>
 </div>
 
+<!--<div class="page" >-->
+
+<!--    <a th:each="i: ${#numbers.sequence(1,page)}" th:href="@{'/list/page/'+${i}}"  th:text="'페이지 ' + ${i}"></a>-->
+
+<!--</div>-->
 
 </body>
 </html>

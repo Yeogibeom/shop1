@@ -19,8 +19,10 @@ import java.util.List;
 public class MyUserDetailsService implements UserDetailsService {
     private final MemberRepository memberRepository;
 
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("==========================================");
       //  DB에서 username을 가진 유저를 찾아와서
        // return new User(유저아이디, 비번, 권한) 해주세요
 
